@@ -17,6 +17,21 @@ const factorial = (n) => {
     if (n === 0 || n === 1) return 1;
     return n * factorial(n - 1);
 };
+
+const s3PutData = async (msg) => {
+    try {
+        const params = {
+            Bucket: "blue-account-bucket",
+            Key: `${dayjs().format()}-${msg}.txt`,
+            Body: msg
+        }
+
+        const data = await s3.upload(params).promise()
+        console.log("File Upload >> ", data.Location)
+    } catch (e) {
+        console.error(e)
+    }
+}
 //////////////////////////////////////////////////////// Func 
 const app = express()
 app.use(express.json()) // added json
@@ -41,6 +56,7 @@ app.use(express.json()) // added json
 
         try {
             await sendMessages();
+            await s3PutData("Enq Success")
             res.status(200).send("enqueue");
         } catch (err) {
             console.error('Error sending messages:', err);
@@ -61,6 +77,7 @@ app.use(express.json()) // added json
         })
 
         app.start()
+        await s3PutData("Deq Success")
         res.status(200).send("consume")
     })
     // [x] SQS

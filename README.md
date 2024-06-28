@@ -18,6 +18,15 @@
 - 사용계정의 ECS 정책에 S3, SQS를 보유하고있는 계정의 Resource를 허용해야 함 (사진참조)
 - SSM 정책 추가 해야 함 + SSM 업데이트 후 재배포 해야 함
 
+### Enqueue / Dequeue
+
+![3](./public/3.png)
+
+```
+  make enq
+  make deq
+```
+
 ## Cross Account EventBridge Pipe Architecture
 
 ![2](./public/2.png)
