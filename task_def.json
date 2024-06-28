@@ -1,0 +1,59 @@
+{
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "runtimePlatform": {
+    "cpuArchitecture": "ARM64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "containerDefinitions": [
+    {
+      "name": "ecs-server-container",
+      "image": "182024812696.dkr.ecr.ap-northeast-2.amazonaws.com/ed-pattern:latest",
+      "cpu": 256,
+      "memory": 512,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "PORT",
+          "value": "3000"
+        },
+        {
+          "name" : "BUCKET_NAME",
+          "value" : "leedonggyu-other-account-bucket"
+        }
+      ],
+      "secrets" : [
+        {
+          "name" : "OTHER_ACCOUNT_SQS_URL",
+          "valueFrom" : "arn:aws:ssm:ap-northeast-2:182024812696:parameter/OTHER_ACCOUNT_SQS_URL"
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "server-container",
+          "awslogs-create-group": "true",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "systemControls": []
+    }
+  ],
+  "family": "donggyu-svc-family",
+  "taskRoleArn": "arn:aws:iam::182024812696:role/donggyu-svc-execution-role",
+  "executionRoleArn": "arn:aws:iam::182024812696:role/donggyu-svc-execution-role"
+}

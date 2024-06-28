@@ -1,0 +1,32 @@
+[
+    {
+        "name"      : "ecs-server-container",
+        "image"     : "zkfmapf123/donggyu-friends:2.0",
+        "cpu"       : 256,
+        "memory"    : 512,
+        "essential" : true,
+    
+        "environment" : [
+          {
+            "name"  : "PORT",
+            "value" : "3000"
+          }
+        ],
+        "portMappings" : [
+          {
+            "containerPort" : 3000,
+            "hostPort"      : 3000,
+            "protocol"      : "tcp"
+          }
+        ],
+        "logConfiguration" : {
+          "logDriver" : "awslogs",
+          "options" : {
+            "awslogs-group"         : "server-container",
+            "awslogs-create-group"  : "true",
+            "awslogs-region"        : "ap-northeast-2",
+            "awslogs-stream-prefix" : "ecs"
+          }
+        }
+      }
+    ]

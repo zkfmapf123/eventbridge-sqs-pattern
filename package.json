@@ -1,0 +1,23 @@
+{
+  "name": "eventbridge-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/webhook": "^7.0.2",
+    "aws-sdk": "^2.1644.0",
+    "dayjs": "^1.11.11",
+    "express": "^4.19.2",
+    "https-proxy-agent": "^7.0.4",
+    "node-slack": "^0.0.7",
+    "slack-node": "^0.1.8",
+    "sqs-consumer": "^10.3.0"
+  }
+}
