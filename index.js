@@ -39,7 +39,7 @@ app.use(express.json()) // added json
     .get("/other-sqs-enqueue", async (req, res) => {
         const sendMessages = async () => {
             const promises = [];
-            for (let i = 0; i < 1000; i++) {
+            for (let i = 0; i < 3000; i++) {
                 const params = {
                     QueueUrl: QUEUE_URL,
                     MessageBody: JSON.stringify({
@@ -80,15 +80,16 @@ app.use(express.json()) // added json
         await s3PutData("Deq Success")
         res.status(200).send("consume")
     })
-    // [x] SQS
-    .post("/sqs", async (req, res) => {
+    // [x] PIPE
+    .post("/pipe", async (req, res) => {
 
-        const { count, num } = req.body.body
-        const result = factorial(num)
-        const msg = `SQS Result : ${count} Factorial Value : ${result}`
+        // console.log(req.body)
+        const { count, value } = req.body.body
+        // const result = factorial(num)
+        const msg = `SQS Result : ${count} Factorial Value : ${value}`
 
         console.log(msg)
-        return res.status(200).json(result)
+        return res.status(200).json(msg)
     })
     .listen(process.env.PORT, () => {
         console.log(`connect localhost:${process.env.PORT} is on`)

@@ -30,3 +30,13 @@
 ## Cross Account EventBridge Pipe Architecture
 
 ![2](./public/2.png)
+![4](./public/4.png)
+
+- EventBridge Pipe 설정하기 위해서는 Target 등록을 해야 함 ( ACM + HTTPS )
+- Pipe는 Terraform으로 안했음
+
+## 결론
+
+- 실시간성은 떨어진다 (Kinesis로 대체...)
+- 챌린지 성격이 강한 HTTP, TCP 통신보다는 Event Driven 하게 동작하는게 더 좋을 수 있을것같다
+- 모든 Queue를 Kafka로 해도 좋을듯 함
